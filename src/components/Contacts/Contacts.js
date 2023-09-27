@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import css from './contacts.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { setDelete } from 'redux/contactsReducer';
@@ -23,34 +22,34 @@ const Contacts = () => {
   //render
   const filteredNames = getFilteredContacts(contacts);
 
-  if(filteredNames.length > 0) {
+  if (filteredNames.length > 0) {
     return (
-        <div className={css.main}>
-            <h1 className={css.title}>Contacts</h1>
-            <ul className={css.list}>
-                {filteredNames.length === 0 ? 'There is no contact added' : filteredNames.map((contact) => {
-                    return <li className={css.list_item} key={contact.id}>
-                        {contact.name}: {contact.number}
-                        <button className={css.delete_btn} onClick={() => onDelete(contact.id)}>Delete</button>
-                        </li>
-                })}
-                {/* <li className={css.list_item}>{name}
+      <div className={css.main}>
+        <h1 className={css.title}>Contacts</h1>
+        <ul className={css.list}>
+          {filteredNames.length === 0
+            ? 'There is no contact added'
+            : filteredNames.map(contact => {
+                return (
+                  <li className={css.list_item} key={contact.id}>
+                    {contact.name}: {contact.number}
+                    <button
+                      className={css.delete_btn}
+                      onClick={() => onDelete(contact.id)}
+                    >
+                      Delete
+                    </button>
+                  </li>
+                );
+              })}
+          {/* <li className={css.list_item}>{name}
                 </li> */}
-            </ul>
-        </div>
-    )
+        </ul>
+      </div>
+    );
   } else {
-    return "There is nothing added here yet..."
+    return 'There is nothing added here yet...';
   }
-
-}
-
-Contacts.propTypes = {
-    contacts: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        number: PropTypes.number.isRequired
-    })),
-    onDelete: PropTypes.func
-}
+};
 
 export default Contacts;
